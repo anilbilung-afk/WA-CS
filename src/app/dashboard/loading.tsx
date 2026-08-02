@@ -42,10 +42,7 @@ export default function InboxLoading() {
               key={i}
               className={`flex ${i % 2 === 0 ? "justify-start" : "justify-end"}`}
             >
-              {/* Wrapper div receives the inline style prop instead of Skeleton */}
-              <div style={{ width: `${120 + Math.random() * 160}px` }}>
-                <Skeleton className="h-10 rounded-2xl w-full" />
-              </div>
+              <Skeleton className={`h-10 rounded-2xl ${i % 2 === 0 ? "w-48" : "w-64"}`} />
             </div>
           ))}
         </div>
