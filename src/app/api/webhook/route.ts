@@ -62,16 +62,15 @@ export async function POST(req: NextRequest) {
                 delivered_at: new Date().toISOString(),
               });
 
-              // Increment message count
+              // Update contact's last_message_at timestamp
               await supabase
                 .from("contacts")
                 .update({
-                  message_count: supabase.rpc ? undefined : undefined,
                   last_message_at: new Date().toISOString(),
                 })
                 .eq("id", upsertedContact.id);
 
-              // Use raw SQL increment
+              // Increment message count safely via RPC
               await supabase.rpc("increment_message_count", { contact_id: upsertedContact.id });
             }
           }
